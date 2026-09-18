@@ -845,3 +845,287 @@ footer {
     }
 
 }
+/* =========================
+   RADAR ANATOMY
+========================= */
+
+.anatomy-section {
+    background: #06111f;
+}
+
+.anatomy-layout {
+    display: grid;
+
+    grid-template-columns: 1.2fr 0.8fr;
+
+    gap: 60px;
+
+    margin-top: 60px;
+
+    align-items: center;
+}
+
+
+/* Radar Diagram */
+
+.anatomy-diagram {
+    min-height: 520px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(66,255,145,0.08),
+            transparent 55%
+        );
+
+    border: 1px solid rgba(66,255,145,0.1);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.anatomy-diagram::before,
+.anatomy-diagram::after {
+    content: "";
+
+    position: absolute;
+
+    background: rgba(66,255,145,0.08);
+}
+
+.anatomy-diagram::before {
+    width: 100%;
+    height: 1px;
+
+    top: 50%;
+    left: 0;
+}
+
+.anatomy-diagram::after {
+    width: 1px;
+    height: 100%;
+
+    left: 50%;
+    top: 0;
+}
+
+
+/* Radar Unit */
+
+.radar-unit {
+    width: 300px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.radar-body {
+    padding: 30px;
+
+    border: 1px solid rgba(66,255,145,0.25);
+
+    background: #0a1a2b;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* Buttons */
+
+.anatomy-part {
+    width: 100%;
+
+    padding: 16px;
+
+    background: #0d2236;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    color: #a9b8c9;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.anatomy-part:hover {
+    border-color: #42ff91;
+
+    color: #42ff91;
+
+    transform: translateX(5px);
+}
+
+.anatomy-part.active {
+    background: rgba(66,255,145,0.12);
+
+    border-color: #42ff91;
+
+    color: #42ff91;
+
+    box-shadow:
+        0 0 20px rgba(66,255,145,0.08);
+}
+
+
+/* Antenna */
+
+.antenna {
+    position: relative;
+
+    margin-bottom: 25px;
+
+    border-radius: 50%;
+
+    height: 90px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(66,255,145,0.15),
+            #0a1a2b 65%
+        );
+}
+
+
+/* Information Panel */
+
+.anatomy-info {
+    padding: 40px;
+
+    background: #0a1a2b;
+
+    border: 1px solid rgba(255,255,255,0.06);
+
+    min-height: 360px;
+}
+
+.info-label {
+    color: #42ff91;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 20px;
+}
+
+.anatomy-info h3 {
+    font-size: 38px;
+
+    margin-bottom: 20px;
+}
+
+.anatomy-info > p {
+    color: #8293a7;
+
+    font-size: 16px;
+
+    margin-bottom: 40px;
+}
+
+.info-details {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.info-details div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.info-details span {
+    color: #42ff91;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.info-details strong {
+    color: #c9d5e0;
+
+    font-size: 14px;
+
+    font-weight: 400;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 850px) {
+
+    .anatomy-layout {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+    .anatomy-diagram {
+        min-height: 450px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .anatomy-diagram {
+        min-height: 380px;
+    }
+
+    .radar-unit {
+        width: 250px;
+    }
+
+    .radar-body {
+        padding: 20px;
+    }
+
+    .anatomy-info {
+        padding: 28px;
+    }
+
+    .anatomy-info h3 {
+        font-size: 30px;
+    }
+
+}
