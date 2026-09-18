@@ -1,10 +1,185 @@
-// =========================
-// RADAR ANATOMY
-// =========================
+/* =========================
+   MOBILE NAVIGATION
+========================= */
+
+const menuButton =
+    document.querySelector(".menu-button");
+
+const mobileNav =
+    document.querySelector(".mobile-nav");
+
+
+if (menuButton && mobileNav) {
+
+    menuButton.addEventListener("click", () => {
+
+        const isOpen =
+            mobileNav.classList.toggle("open");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            isOpen
+        );
+
+        menuButton.textContent =
+            isOpen ? "×" : "☰";
+
+    });
+
+
+    mobileNav.querySelectorAll("a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            mobileNav.classList.remove("open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuButton.textContent = "☰";
+
+        });
+
+    });
+
+}
+
+
+/* =========================
+   HERO RADAR READOUT
+========================= */
+
+const rangeValue =
+    document.getElementById("range-value");
+
+const targetCount =
+    document.getElementById("target-count");
+
+const radarStatus =
+    document.getElementById("radar-status");
+
+
+const radarTargets =
+    document.querySelectorAll(".radar-target");
+
+
+let lastSweepAngle = 0;
+
+
+function updateRadarReadout() {
+
+    if (!rangeValue || !targetCount || !radarStatus) {
+        return;
+    }
+
+
+    const range =
+        (18 + Math.random() * 16).toFixed(1);
+
+    rangeValue.textContent =
+        `${range} km`;
+
+
+    const count =
+        Math.max(
+            2,
+            Math.min(
+                6,
+                radarTargets.length +
+                Math.floor(Math.random() * 3) - 1
+            )
+        );
+
+    targetCount.textContent =
+        String(count).padStart(2, "0");
+
+
+    const statuses = [
+        "SCANNING",
+        "TRACKING",
+        "SCANNING",
+        "SEARCHING"
+    ];
+
+    radarStatus.textContent =
+        statuses[
+            Math.floor(
+                Math.random() * statuses.length
+            )
+        ];
+
+}
+
+
+setInterval(
+    updateRadarReadout,
+    1800
+);
+
+updateRadarReadout();
+
+
+/* =========================
+   RADAR TARGET INTERACTION
+========================= */
+
+radarTargets.forEach(target => {
+
+    target.addEventListener("mouseenter", () => {
+
+        target.classList.add("detected");
+
+    });
+
+
+    target.addEventListener("mouseleave", () => {
+
+        target.classList.remove("detected");
+
+    });
+
+});
+
+
+/* =========================
+   RADAR SWEEP ACTIVITY
+========================= */
+
+const radarSweep =
+    document.querySelector(".radar-sweep");
+
+
+if (radarSweep) {
+
+    radarSweep.addEventListener(
+        "animationiteration",
+        () => {
+
+            radarStatus.textContent =
+                "SCANNING";
+
+            radarTargets.forEach(target => {
+
+                target.classList.remove("detected");
+
+            });
+
+        }
+    );
+
+}
+
+
+/* =========================
+   RADAR ANATOMY
+========================= */
 
 const anatomyParts = {
 
     antenna: {
+
         title: "Antenna",
 
         description:
@@ -15,9 +190,12 @@ const anatomyParts = {
 
         role:
             "Sends and receives electromagnetic waves."
+
     },
 
+
     transmitter: {
+
         title: "Transmitter",
 
         description:
@@ -28,9 +206,12 @@ const anatomyParts = {
 
         role:
             "Produces the electromagnetic signal."
+
     },
 
+
     receiver: {
+
         title: "Receiver",
 
         description:
@@ -41,9 +222,12 @@ const anatomyParts = {
 
         role:
             "Captures and amplifies returning echoes."
+
     },
 
+
     processor: {
+
         title: "Signal Processor",
 
         description:
@@ -54,9 +238,12 @@ const anatomyParts = {
 
         role:
             "Turns raw echoes into useful information."
+
     },
 
+
     display: {
+
         title: "Display",
 
         description:
@@ -67,6 +254,7 @@ const anatomyParts = {
 
         role:
             "Presents detected targets and measurements."
+
     }
 
 };
@@ -98,12 +286,17 @@ anatomyButtons.forEach(button => {
         const data =
             anatomyParts[part];
 
-        if (!data) return;
+        if (!data) {
+            return;
+        }
 
 
         anatomyButtons.forEach(item => {
+
             item.classList.remove("active");
+
         });
+
 
         button.classList.add("active");
 
@@ -123,13 +316,16 @@ anatomyButtons.forEach(button => {
     });
 
 });
-// =========================
-// RADAR APPLICATIONS
-// =========================
+
+
+/* =========================
+   RADAR APPLICATIONS
+========================= */
 
 const applicationData = {
 
     weather: {
+
         title: "Weather Radar",
 
         description:
@@ -140,9 +336,12 @@ const applicationData = {
 
         principle:
             "Reflected signals reveal information about precipitation."
+
     },
 
+
     automotive: {
+
         title: "Automotive Radar",
 
         description:
@@ -153,9 +352,12 @@ const applicationData = {
 
         principle:
             "Range and Doppler measurements help detect nearby objects."
+
     },
 
+
     aviation: {
+
         title: "Air Traffic Radar",
 
         description:
@@ -166,9 +368,12 @@ const applicationData = {
 
         principle:
             "Radar echoes provide information about aircraft position and motion."
+
     },
 
+
     marine: {
+
         title: "Marine Radar",
 
         description:
@@ -179,9 +384,12 @@ const applicationData = {
 
         principle:
             "Reflected signals reveal the location of objects around a vessel."
+
     },
 
+
     speed: {
+
         title: "Speed Radar",
 
         description:
@@ -192,9 +400,12 @@ const applicationData = {
 
         principle:
             "The Doppler effect provides information about relative velocity."
+
     },
 
+
     gpr: {
+
         title: "Ground-Penetrating Radar",
 
         description:
@@ -205,9 +416,12 @@ const applicationData = {
 
         principle:
             "Reflections from underground boundaries reveal subsurface structure."
+
     },
 
+
     sar: {
+
         title: "Synthetic Aperture Radar",
 
         description:
@@ -218,9 +432,12 @@ const applicationData = {
 
         principle:
             "Multiple radar measurements can be combined to produce high-resolution imagery."
+
     },
 
+
     space: {
+
         title: "Space Radar",
 
         description:
@@ -231,6 +448,7 @@ const applicationData = {
 
         principle:
             "Radar can actively illuminate Earth's surface and measure returned signals."
+
     }
 
 };
@@ -262,12 +480,17 @@ applicationCards.forEach(card => {
         const data =
             applicationData[application];
 
-        if (!data) return;
+        if (!data) {
+            return;
+        }
 
 
         applicationCards.forEach(item => {
+
             item.classList.remove("active");
+
         });
+
 
         card.classList.add("active");
 
@@ -287,3 +510,141 @@ applicationCards.forEach(card => {
     });
 
 });
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".feature-card, .process-step, .topic-card, .application-card"
+    );
+
+
+if (
+    "IntersectionObserver" in window &&
+    revealElements.length
+) {
+
+    const revealObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "is-visible"
+                        );
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+
+    revealElements.forEach(
+        element => {
+
+            element.classList.add(
+                "reveal-ready"
+            );
+
+            revealObserver.observe(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   ACTIVE NAVIGATION
+========================= */
+
+const sections =
+    document.querySelectorAll(
+        "main section[id]"
+    );
+
+const navLinks =
+    document.querySelectorAll(
+        ".nav-links a"
+    );
+
+
+if (
+    "IntersectionObserver" in window &&
+    sections.length &&
+    navLinks.length
+) {
+
+    const navObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        navLinks.forEach(link => {
+
+                            link.classList.remove(
+                                "active"
+                            );
+
+                            if (
+                                link.getAttribute(
+                                    "href"
+                                ) ===
+                                `#${entry.target.id}`
+                            ) {
+
+                                link.classList.add(
+                                    "active"
+                                );
+
+                            }
+
+                        });
+
+                    }
+
+                });
+
+            },
+            {
+                rootMargin:
+                    "-35% 0px -55% 0px"
+            }
+        );
+
+
+    sections.forEach(
+        section => {
+
+            navObserver.observe(
+                section
+            );
+
+        }
+    );
+
+}
